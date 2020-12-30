@@ -24,10 +24,10 @@ print(results)
 for x in results:
     print(x)
 
-cnxn.commit()
+# cnxn.commit()
 
 
-for driver in pyodbc.drivers():
-    print (driver)
+# for driver in pyodbc.drivers():
+#     print (driver)
 
 
