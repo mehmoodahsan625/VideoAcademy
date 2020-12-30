@@ -31,15 +31,15 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/edit_videos")
-def edit_videos():
+@app.route("/edit_videos/<int:id>")
+def edit_videos(id):
     time = []
-    cursor.execute(''' SELECT * FROM projectvideos WHERE id = 2 ''') 
+    cursor.execute(''' SELECT * FROM projectvideos WHERE id = {0} '''.format(id)) 
     data = cursor.fetchone()
     vid_id = data.Url
 
 
-    cursor.execute(''' SELECT * FROM projectvideoclips WHERE VideoId = 58 ''')
+    cursor.execute(''' SELECT * FROM projectvideoclips WHERE VideoId = {0} '''.format(id))
     results = cursor.fetchall()
     # name = results.StartTime
     # name1 = results.EndTime
@@ -48,7 +48,7 @@ def edit_videos():
         # print(x.StartTime,x.EndTime)
 
     # clip = VideoFileClip("{0}".format(vid_id))
-    clip = VideoFileClip("https://azuresquarevfiles.blob.core.windows.net/videoacademyfiles/Test%20title%20of%20project_11/20201119025223586.mp4")
+    clip = VideoFileClip("{0}".format(vid_id))
     # clip = VideoFileClip("./static/projects/{0}/{1}/Clips/{2}".format(u_id,proj_name,video_file))
     for x in results:
         clip1 = clip.subclip(float(x.StartTime),float(x.EndTime))
